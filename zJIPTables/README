@@ -1,0 +1,34 @@
+jIPtables - Java library for iptables
+by Daniel Zozin <zdenial@gmx.com>
+
+This library provides a communication interface to the iptables firewall, to linux netfilter logger and connection tracker.
+
+The jIPtables rule management system allows to parse, generate and apply the iptables rules to the local linux machine.
+The log tracker provides a java notification system for low level netfilter log events.
+The connection tracker notifies for established connections and connection state changes.
+
+INSTALLATION
+The full implementation of jIPtables requires libnetfilter_log and libnetfilter_conntrack in order to be compiled.
+You can download them at http://www.netfilter.org/
+
+If you want to use the full implementation, after installing the required libraries go into the main directory and type:
+ant build
+
+If you want only to use the netfilter event logger type:
+ant build-log
+
+If you want only to use the netfilter connection tracker type:
+ant build-conn
+
+The ant script will generate the compiled library files.
+
+USAGE
+To use the library you must include the jar archive in your project and place the compiled library files in a system library directory or in the working directory.
+The doc directory contains the library javadoc documentation.
+
+In order to access to the firewall and netfilter functionalities the library needs the CAP_NET_ADMIN capability.
+You can set that capability by adding to /etc/security/capability.conf a line like:
+
+cap_net_admin        YOUR-APP-USER
+
+replacing YOUR-APP-USER with the username that runs the application.

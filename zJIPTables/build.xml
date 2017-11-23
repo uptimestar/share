@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="build" name="jIPtables">
+	<property environment="env" />
+	<property name="debuglevel" value="source,lines,vars" />
+	<property name="target" value="1.6" />
+	<property name="source" value="1.6" />
+	<target name="build" depends="build-log,build-conn" description="Build the platform dependent native interface for netfilter log and conntrack."/>
+	<target name="build-log" description="Build the platform dependent native interface for netfiler log.">
+		<exec executable="gcc">
+			<arg line="-l netfilter_log_libipulog -I./include -shared -o libjiptables_log.so src/jiptables_log.c" />
+		</exec>
+	</target>
+	<target name="build-conn" description="Build the platform dependent native interface for netfiler conntrack.">
+		<exec executable="gcc">
+			<arg line="-l netfilter_conntrack -I./include -shared -o libjiptables_conntrack.so src/jiptables_conntrack.c" />
+		</exec>
+	</target>
+	<target name="clean">
+		<delete file="libjiptables_log.so" />
+		<delete file="libjiptables_conntrack.so" />
+	</target>
+</project>
